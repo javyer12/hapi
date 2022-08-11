@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "phyform",
+  "private_key_id": "4313fcba6e0af0b39331b214188f6d9b20a35088",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDcfIl7Y1MkgL4z\nUlOfLnFl/MmS1rmdDrDwCyrmNmYvf8Jd5gbKN6YEnyeay13GcuZ+HbpyD93z8QHz\njwqqG6vqXLOpObVC04L8SUUz52ANgUNvwExTl8YZF7trVzPRqtXjvgZtKxP4At6f\nNoVarZgRyFPHebsp0yfQTesfRTl8byAvVElD8NfrjHXM6Uue/gn/uLR42bALnWHA\n3ISEUs442p2WrdlcVYP+Zb/sPVOoKzmIZWXzzzrINuMvsBzUWL/TLZRzdG1Npo2x\nWaao6EnEsV5cXUXL9p2wUzjRU5rQHqxQtzplN1g2TYdhL/S+Ja68PMr60lISNBjd\niGDyZezJAgMBAAECggEAEahVmFCZiXxX/yMyODbPdRP8DqrsnYPeLrMuQdaMc3Rf\nXAa+d3ZicM9QLCjqPyjXhbUax+S2aUFdXySO/ZWOvIulBcHt3sayoEK77I60lhBK\nlsoHMtCeWEcaxttqdnmgfIcs25ROGpgcPRLwNhVd7tqkvv5kO1LCRv/eexgfpPPZ\nSM1r7IDHgi6H+rGpRDaWlZS/ez0dNVpfm+EDDy1Vix4wpWveJcHLudSO2MjJfsbD\n8VYONZxrex5r2q9c4kN5ejQPYmkJ80HClj6q/DPmpmV2j0Kfgg73MvGJafAqngh7\nDJ5DI5JZVjBe8D/Zkk0C5C2b96sJZlahtSyIsqXSwwKBgQDw9L7vB488m2m29o7J\nP4H9MSVW5qC7m2DWk+bztILxNUU4AS1At+ZBHDQObIusDhOvUoPVTN0qXEYWT2oF\niKGe//zcaf6GuDhGFwzzSpeT2vwPPQSoIj5ou+aRBt3um15i0CPSzBXFaSmIKQ7/\nxIuA65Shv0oQh/YpmwYwlk9iUwKBgQDqQJ8e+hXCe1+iXZojqAu0arcdevnj5689\n7UCJgrPa8YAw2hSaaqNUjwR4MePU1qJrHGVUrJKndEL9KLIBEnvalD5GOFBAqIQp\nzOqgKDQ7kZCVQE9JXpTnrIRwzB03CWi0wWh4KmkbkSLeb58f13SDv7UOH8ETmWjh\nJg95cQMI8wKBgQDdyTlRxNCIBbj5itqEzOr2RV1MLr410OACwmJrYXTBVroewZ6I\nmnza433a5Phu5wohbz8ffz93dTWh5Xj+HPQ+6PszWnDIShqqER9/dOIuWvt1f0Gh\nDNwLBSFFzl9K+EGZjGHc7rL/YTu0M661p5CMmsrVUsB2lN71DtdUs5XgNwKBgE0q\nroBQ19wyMiXVedJnKDvtr5bJjQozpznaLxldcgwc5CKzpHfdyyIu3sUNgkT505U/\nTG4hT0pUdUDaKBFMWnp9vSn6oQ07thXjCCNsOxCoeh2Ait3bh2fuH87cnn8j3Vc2\nI0j6h5dqLzdhQ+UEX8CK5YTalwryzWbl19EklmBbAoGBAOuA4+lV6N9WDOLTmLqN\n3OQaEueVZFTzYQRzu6/iWcKnw2aeccMK2//Fz48csGpBVEcNht0ThvqinmcmgfIG\niLHoeWSsus8gkNAXp3SXjvmXJPuThmq7yKZnTqE+qjW/06mQMIwNt8tKwv9Fk41Y\nzZWrOafis/2Lz530TYJWnGQ6\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-g2cje@phyform.iam.gserviceaccount.com",
+  "client_id": "111163519694267498753",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-g2cje%40phyform.iam.gserviceaccount.com"
+}
