@@ -5,7 +5,7 @@ const inert = require("@hapi/inert");
 const path = require("path");
 const vision = require("@hapi/vision");
 const handlerbars = require("handlebars");
-const routes = require('./routes.ts');
+const routes = require("./routes.ts");
 
 const server = Hapi.server({
   port: process.env.PORT || 3005,

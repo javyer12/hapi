@@ -23,5 +23,5 @@ async function validateUser(req, h) {
 }
 module.exports = {
     createUser: createUser,
-    validateUser : validateUser
+    validateUser: validateUser
 }
