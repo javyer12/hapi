@@ -17,13 +17,20 @@ const server = Hapi.server({
   },
 });
 
-async function init() {
+async function init()  {
   try {
     await server.start();
 
     await server.register(inert);
     await server.register(vision);
 
+    server.state('user', {
+      ttl: 1000 * 60 * 60 * 24 * 7,
+      //evaluar si la cookie es segura, evalua el ambiente de desarrollo, si es desarrollo, no es segura, si es de proceso la cookie  sera segura
+      isSecure: process.env.NODE_ENV === 'prod',
+      encoding: 'base64json'
+    })
+    
     server.views({
       engines: {
         hbs: handlerbars,
@@ -41,6 +48,14 @@ async function init() {
   }
   console.log(`servidor lanzado en: ${server.info.uri}`);
 }
+//cuando una promesa es rechazada y no manejada
+process.on('unhandledRejection',error => {
+  console.error('UnhandleRejection', error.message, error);
+})
+//error del sistema
+process.on('unhandleException',error => {
+  console.error('UnhandleException', error.message, error);
+})
 init();
 
 // server.views({

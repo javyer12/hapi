@@ -29,6 +29,23 @@
                     style="max-height: 100px;"
                   /></a></h1>
             </div>
+            {{#if user}}
+            <div class="col m-2 text-right">
+              <h3><span class="badge badge-success ">Hola {{user.name}}!!!</span></h3>
+              <a
+                href="/"
+                class="btn btn-primary btn-md border border-white"
+                role="button"
+                aria-pressed="true"
+              >Preguntar</a>
+              <a
+                href="./logout"
+                class="btn btn-primary btn-md border border-white ml-2"
+                role="button"
+                aria-pressed="true"
+              >Salir</a>
+            </div>
+            {{else}}
             <div class="col m-2 text-right">
               <a
                 href="./login"
@@ -43,6 +60,7 @@
                 aria-pressed="true"
               >Registrarse</a>
             </div>
+            {{/if}}
           </div>
         </nav>
       </div>
