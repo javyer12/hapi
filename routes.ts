@@ -2,6 +2,7 @@
 const joi = require('joi')
 const site = require('./controllers/site.ts');
 const user = require('./controllers/user.ts');
+const question = require('./controllers/questions.ts');
 
 module.exports = [{
     method: 'GET',
@@ -43,6 +44,20 @@ module.exports = [{
     handler: user.validateUser
 },
 {
+    method: 'POST',
+    path: '/create-question',
+    options: {
+        validate: {
+            payload: joi.object({
+                title: joi.string().required(),
+                description: joi.string().required().min(6)
+            }),
+            failAction: user.failValidation
+        }
+    },
+    handler: question.createQuestion
+},
+{
     method: 'GET',
     path: '/login',
     handler: site.login
@@ -51,6 +66,11 @@ module.exports = [{
     method: 'GET',
     path: '/logout',
     handler: user.logout
+},
+{
+    method: 'GET',
+    path: '/ask',
+    handler: site.ask
 },
 // {
 //     method: 'POST',
@@ -64,11 +84,16 @@ module.exports = [{
 },
 {
     method: 'GET',
-    path: '/{param*}',
+    path: '/assets/{param*}',
     handler: {
         directory: {
             path: '.',
             index: ['index.html']
         }
     }
+},
+{
+    method: ['GET', 'POST'],
+    path: '/{any*}',
+    handler: site.notFound
 }]

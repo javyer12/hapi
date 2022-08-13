@@ -10,7 +10,9 @@ firebase.initializeApp({
 
 const db = firebase.database();
 const Useres = require('./users');
+const Questions = require('./question');
 
 module.exports = {
-    users: new Useres(db)
+    users: new Useres(db),
+    questions : new Questions(db)
 }

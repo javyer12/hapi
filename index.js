@@ -6,6 +6,7 @@ const path = require("path");
 const vision = require("@hapi/vision");
 const handlerbars = require("handlebars");
 const routes = require("./routes.ts");
+const site = require("./controllers/site.ts");
 
 const server = Hapi.server({
   port: process.env.PORT || 3005,
@@ -17,20 +18,20 @@ const server = Hapi.server({
   },
 });
 
-async function init()  {
+async function init() {
   try {
     await server.start();
 
     await server.register(inert);
     await server.register(vision);
 
-    server.state('user', {
+    server.state("user", {
       ttl: 1000 * 60 * 60 * 24 * 7,
       //evaluar si la cookie es segura, evalua el ambiente de desarrollo, si es desarrollo, no es segura, si es de proceso la cookie  sera segura
-      isSecure: process.env.NODE_ENV === 'prod',
-      encoding: 'base64json'
-    })
-    
+      isSecure: process.env.NODE_ENV === "prod",
+      encoding: "base64json",
+    });
+
     server.views({
       engines: {
         hbs: handlerbars,
@@ -40,8 +41,10 @@ async function init()  {
       layout: true,
       layoutPath: "views",
     });
+
+    server.ext("onPreResponse", site.fileNotFound);
     server.route(routes);
-    await server.start();
+    // await server.start();
   } catch (e) {
     console.error(e);
     process.exit(1);
@@ -49,13 +52,13 @@ async function init()  {
   console.log(`servidor lanzado en: ${server.info.uri}`);
 }
 //cuando una promesa es rechazada y no manejada
-process.on('unhandledRejection',error => {
-  console.error('UnhandleRejection', error.message, error);
-})
+process.on("unhandledRejection", (error) => {
+  console.error("UnhandleRejection", error.message, error);
+});
 //error del sistema
-process.on('unhandleException',error => {
-  console.error('UnhandleException', error.message, error);
-})
+process.on("unhandleException", (error) => {
+  console.error("UnhandleException", error.message, error);
+});
 init();
 
 // server.views({

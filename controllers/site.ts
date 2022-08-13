@@ -31,6 +31,27 @@ function login(req, h) {
 //         title: "no login"
 //     })
 // }
+function notFound(req, h) {
+    //en la 404 no hay ningun parametro, por eso el objeto esta vacio
+    //el segundo objeto es para cambiar propiedades de vision
+    return h.view('404', {}, {layout: 'error'}).code(404)
+}
+function fileNotFound (req, h) {
+    const response = req.response
+    if(response.isBoom && response.output.statusCode === 404) {
+        return h.view('404', {}, {layout: 'error'}).code(404)
+    }
+    return h.continue;
+}
+function ask (req, h) {
+    if(!req.state.user){
+        return h.redirect('/login')
+    }
+    return h.view('ask', {
+        title:'Create Question',
+        user: req.state.user
+    })
+}
 
 function hello(req, h) {
     return h.response("hola mundo") //code(404).message("sorry was a mistake")
@@ -41,8 +62,12 @@ function redirect(req, h) {
 }
 module.exports = {
     home: home,
+    fileNotFound: fileNotFound,
     register: register,
     login: login,
+    ask: ask,
+    notFound: notFound,
+    
+    redirect: redirect,
     hello: hello,
-    redirect: redirect
 }
