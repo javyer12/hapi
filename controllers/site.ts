@@ -1,10 +1,18 @@
 'use strict'
 
+const questions = require("../models/index.ts").questions;
 
-function home(req, h) {
+async function home(req, h) {
+    let data;
+    try {
+        data = await questions.getLast(10)
+    } catch (error) {
+        console.log(error.message);
+    }
     return h.view('index', {
         title: "home",
-        user:req.state.user
+        user: req.state.user,
+        questions: data
     })
 }
 
@@ -14,7 +22,7 @@ function register(req, h) {
     }
     return h.view('register', {
         title: "register",
-        user:req.state.user
+        user: req.state.user
     })
 }
 function login(req, h) {
@@ -23,7 +31,24 @@ function login(req, h) {
     }
     return h.view('login', {
         title: "login",
-        user:req.state.user
+        user: req.state.user
+    })
+}
+async function viewQuestion(req, h) {
+    let data;
+    try {
+        data = await questions.getOne(req.params.id);
+        if (!data) {
+            return notFound(req, h);
+        }
+    } catch (error) {
+        console.log(error.message)
+    }
+    return h.view('question', {
+        title: 'Detalles de la pregunta',
+        user: req.state.user,
+        question: data,
+        key: req.params.id
     })
 }
 // function notlogin(req, h){
@@ -34,21 +59,21 @@ function login(req, h) {
 function notFound(req, h) {
     //en la 404 no hay ningun parametro, por eso el objeto esta vacio
     //el segundo objeto es para cambiar propiedades de vision
-    return h.view('404', {}, {layout: 'error'}).code(404)
+    return h.view('404', {}, { layout: 'error' }).code(404)
 }
-function fileNotFound (req, h) {
+function fileNotFound(req, h) {
     const response = req.response
-    if(response.isBoom && response.output.statusCode === 404) {
-        return h.view('404', {}, {layout: 'error'}).code(404)
+    if (response.isBoom && response.output.statusCode === 404) {
+        return h.view('404', {}, { layout: 'error' }).code(404)
     }
     return h.continue;
 }
-function ask (req, h) {
-    if(!req.state.user){
+function ask(req, h) {
+    if (!req.state.user) {
         return h.redirect('/login')
     }
     return h.view('ask', {
-        title:'Create Question',
+        title: 'Create Question',
         user: req.state.user
     })
 }
@@ -61,13 +86,14 @@ function redirect(req, h) {
     alert("Here, Learn about it ")
 }
 module.exports = {
-    home: home,
-    fileNotFound: fileNotFound,
-    register: register,
-    login: login,
-    ask: ask,
-    notFound: notFound,
-    
-    redirect: redirect,
-    hello: hello,
+    home,
+    fileNotFound,
+    register,
+    login,
+    ask,
+    viewQuestion,
+    notFound,
+
+    redirect,
+    hello,
 }

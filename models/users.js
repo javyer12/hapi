@@ -17,7 +17,6 @@ class Users {
   }
 
   async create(data) {
-    console.log(data);
     const user = { ...data };
     console.log(data);
     user.password = await this.constructor.encrypt(data.password);

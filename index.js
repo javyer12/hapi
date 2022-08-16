@@ -4,9 +4,10 @@ const Hapi = require("@hapi/hapi");
 const inert = require("@hapi/inert");
 const path = require("path");
 const vision = require("@hapi/vision");
-const handlerbars = require("handlebars");
+const handlebars = require("./helpers/helpers.ts");
 const routes = require("./routes.ts");
 const site = require("./controllers/site.ts");
+const methods = require("./helpers/methods.ts");
 
 const server = Hapi.server({
   port: process.env.PORT || 3005,
@@ -25,6 +26,7 @@ async function init() {
     await server.register(inert);
     await server.register(vision);
 
+    server.method("setAnswerRight", methods.setAnswerRight);
     server.state("user", {
       ttl: 1000 * 60 * 60 * 24 * 7,
       //evaluar si la cookie es segura, evalua el ambiente de desarrollo, si es desarrollo, no es segura, si es de proceso la cookie  sera segura
@@ -34,7 +36,7 @@ async function init() {
 
     server.views({
       engines: {
-        hbs: handlerbars,
+        hbs: handlebars,
       },
       relativeTo: __dirname,
       path: "views",
