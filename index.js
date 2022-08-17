@@ -1,6 +1,8 @@
 "use strict";
-
+const blankie = require('blankie');
+const scooter = require('@hapi/scooter');
 const Hapi = require("@hapi/hapi");
+const crumb = require('@hapi/crumb')
 const inert = require("@hapi/inert");
 const path = require("path");
 const vision = require("@hapi/vision");
@@ -25,8 +27,47 @@ async function init() {
 
     await server.register(inert);
     await server.register(vision);
+    await server.register({
+      plugin: crumb,
+      options: {
+        cookieOptions: {
+          isSecure: process.env.NODE_ENV === 'production'
+        }
+      }
+    })
+    await server.register([scooter, {
+      plugin: blankie,
+      options: {
+          defaultSrc: `'self' 'unsafe-inline'`,
+          styleSrc: `'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com`,
+          fontSrc: `'self' 'unsafe-inline' data:`,
+          scriptSrc: `'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://maxcdn.bootstrapcdn.com https://code.jquery.com`,
+          generateNonces: false
+      }
+  }]); 
+  
+    // await server.register({
+    //   plugin: require("hapi-pino"),
+    //   options: {
+    //       prettyPrint: process.env.NODE_ENV !== 'production',
+    //       // redact: [req.headers.authorization]
+    //     },
+    // });
 
-    server.method("setAnswerRight", methods.setAnswerRight);
+    await server.register({
+      plugin: require('./helpers/api.ts'),
+      options: {
+        prefix: 'api'
+      }
+    });
+
+    server.method("setAnswerRight", methods.setAnswerRighty);
+    server.method("getLast", methods.getLast, {
+      cache: {
+        expiresIn: 1000 * 30,
+        generateTimeout: 1000,
+      },
+    });
     server.state("user", {
       ttl: 1000 * 60 * 60 * 24 * 7,
       //evaluar si la cookie es segura, evalua el ambiente de desarrollo, si es desarrollo, no es segura, si es de proceso la cookie  sera segura

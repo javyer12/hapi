@@ -7,6 +7,12 @@ const question = require('./controllers/questions.ts');
 module.exports = [{
     method: 'GET',
     path: '/',
+    options: {
+        cache: {
+            expiresIn: 1000 * 60,
+            privacy : 'private'
+        }
+    },
     handler: site.home
 },
 {
@@ -47,10 +53,15 @@ module.exports = [{
     method: 'POST',
     path: '/create-question',
     options: {
+        payload: {
+            parse: true,
+            multipart: true
+        },
         validate: {
             payload: joi.object({
                 title: joi.string().required(),
-                description: joi.string().required().min(6)
+                description: joi.string().required().min(6),
+                image: joi.any().optional(),
             }),
             failAction: user.failValidation
         }
@@ -70,6 +81,11 @@ module.exports = [{
         }
     },
     handler: question.answerQuestion
+},
+{
+    method: 'GET',
+    path: '/answer/{questionId}/{answerId}',
+    handler: question.setAnswerRight
 },
 {
     method: 'GET',

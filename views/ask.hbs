@@ -17,7 +17,7 @@
               {{this}}
             </div>
           {{/with }}
-          <form method="POST" action="/create-question" >
+          <form method="POST" action="/create-question" enctype="multipart/form-data" >
             <div class="form-group">
               <label for="title">Título</label>
               <input
@@ -37,7 +37,22 @@
                 placeholder="Ingrese la descripción"
               ></textarea>
             </div>
+            <div class="form-group m-4">
+              <label for="description">Image(PGN)</label>
+              <input
+                {{!-- class="form-control" --}}
+                type="file"
+                id="image"
+                name="image"
+                accept="image/png"
+              />
+            </div>
             <div class="text-center mt-5">
+               <input 
+                type="hidden"
+                name="crumb"
+                value={{crumb}}
+                />
               <button type="submit" class="btn btn-primary">Crear Pregunta</button>
             </div>
           </form>

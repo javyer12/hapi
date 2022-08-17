@@ -6,17 +6,23 @@ class Questions {
     this.collection = this.ref.child("questions");
   }
 
-  async create(data, user) {
-    const ask = { ...data };
-    ask.owner = user;
+  async create(data, user, filename) {
+    const ask = { 
+      description: data.description,
+      title: data.title,
+      owner: user };
+    
+    if (filename) {
+      ask.filename = filename;
+    }
     const question = this.collection.push(ask);
     // question.set(data);
 
     return question.key;
   }
 
-  async getLast(amount) {
-    const query = await this.collection.limitToLast(amount).once("value");
+  async getLast(amout) {
+    const query = await this.collection.limitToLast(amout).once("value");
     const data = query.val();
     let orderedData = {};
     Object.keys(data)
@@ -44,19 +50,19 @@ class Questions {
   }
   async setAnswerRight(questionId, answerId, user) {
     const query = await this.collection.child(questionId).once("value");
-    const question = query.val();
-    const answers = questions.answers;
+    const questiom = query.val();
+    const answers = questiom.answers;
 
-    if (!user.email === question.owner.email) {
+    if (!user.email === questiom.owner.email) {
       return false;
     }
     for (let key in answers) {
-      answers[key].correct = key === answerId;
+      answers[key].correct = (key === answerId);
     }
     const update = await this.collection
       .child(questionId)
-      .child("answer")
-      .update(answer);
+      .child("answers")
+      .update(answers);
     return update;
   }
 }
