@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "deply": "gh-pages -d index.js",
     "dev": "nodemon --ext js, hbs, ts",
     "lint": "standard",
-    "lint-fix": "standard --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint-fix": "standard --fix"
   },
   "keywords": [],
   "author": "Francisco Murillo",
