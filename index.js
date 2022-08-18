@@ -12,7 +12,7 @@ const site = require("./controllers/site.ts");
 const methods = require("./helpers/methods.ts");
 
 const server = Hapi.server({
-  port: process.env.PORT || 3005,
+  port: process.env.PORT || 3000,
   host: "localhost",
   routes: {
     files: {
@@ -96,7 +96,7 @@ async function init() {
 }
 //cuando una promesa es rechazada y no manejada
 process.on("unhandledRejection", (error) => {
-  console.error("UnhandleRejection", error.message, error);
+  console.error("UnhandleRejection", error.message, error.localization);
 });
 //error del sistema
 process.on("unhandleException", (error) => {

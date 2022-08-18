@@ -44,11 +44,12 @@ async function answerQuestion(req, h) {
     if (!req.state.user) return h.redirect('/login')
 
     let result;
+
     try {
         result = await questiones.answer(req.payload, req.state.user);
         console.log(`respuesta creada: ${result}`)
     } catch (error) {
-        console.log(error.message)
+        console.log('aqui es ' + error.message)
     }
     return h.redirect(`/question/${req.payload.id}`)
 }
@@ -56,6 +57,7 @@ async function setAnswerRight(req, h) {
     if (!req.state.user) return h.redirect('/login')
 
     let result;
+    console.log('este es setanswer ' + result)
     try {
         result = await req.server.methods.setAnswerRight(
             req.params.questionId,

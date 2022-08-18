@@ -34,10 +34,11 @@ async function viewQuestion(req, h) {
     try {
         data = await questions.getOne(req.params.id);
         if (!data) {
+            console.log(data)
             return notFound(req, h);
         }
     } catch (error) {
-        console.log(error.message)
+        console.log( error.message)
     }
     return h.view('question', {
         title: 'Detalles de la pregunta',
@@ -78,7 +79,6 @@ function hello(req, h) {
 }
 function redirect(req, h) {
     return h.redirect("http://platzi.com")
-    alert("Here, Learn about it ")
 }
 module.exports = {
     home,
