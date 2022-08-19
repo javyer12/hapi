@@ -51,8 +51,9 @@ async function answerQuestion(req, h) {
     } catch (error) {
         console.log('aqui es ' + error.message)
     }
-    return h.redirect(`/question/${req.payload.id}`)
+    return h.redirect(`/question/${req.payload.id}`);
 }
+
 async function setAnswerRight(req, h) {
     if (!req.state.user) return h.redirect('/login')
 

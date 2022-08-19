@@ -16,9 +16,9 @@ const server = Hapi.server({
   host: "localhost",
   routes: {
     files: {
-      relativeTo: path.join(__dirname, "public"),
-    },
-  },
+      relativeTo: path.join(__dirname, 'public')
+    }
+  }
 });
 
 async function init() {
@@ -64,7 +64,7 @@ async function init() {
     server.method("setAnswerRight", methods.setAnswerRighty);
     server.method("getLast", methods.getLast, {
       cache: {
-        expiresIn: 1000 * 30,
+        expiresIn: 1000 * 15,
         generateTimeout: 1000,
       },
     });
@@ -94,9 +94,9 @@ async function init() {
   }
   console.log(`servidor lanzado en: ${server.info.uri}`);
 }
-//cuando una promesa es rechazada y no manejada
+// cuando una promesa es rechazada y no manejada
 process.on("unhandledRejection", (error) => {
-  console.error("UnhandleRejection", error.message, error.localization);
+  console.error("UnhandleRejection", error.message, error);
 });
 //error del sistema
 process.on("unhandleException", (error) => {

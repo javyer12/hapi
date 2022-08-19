@@ -44,9 +44,9 @@ class Questions {
     };
   }
   async answer(data, user) {
-    const answer = await this.collection.child(data.id).child("answers").push();
-    answer.set({ text: data.answer, user: user });
-    return answer;
+    const answers = await this.collection.child(data.id).child('answers').push();
+    answers.set({ text: data.answer, user: user });
+    return answers;
   }
   async setAnswerRight(questionId, answerId, user) {
     const query = await this.collection.child(questionId).once("value");

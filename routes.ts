@@ -69,8 +69,8 @@ module.exports = [{
     handler: question.createQuestion
 },
 {
-    method: 'POST',
     path: '/answer-question',
+    method: 'POST', 
     options: {
         validate: {
             payload: joi.object({
