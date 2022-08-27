@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deply": "gh-pages -d views/index",
+    "deply": "gh-pages -d views/index.hbs",
     "dev": "nodemon --ext js, hbs, ts",
     "lint": "standard",
     "lint-fix": "standard --fix"
