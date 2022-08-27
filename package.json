@@ -6,7 +6,7 @@
   "scripts": {
     "deply": "gh-pages -d public",
     "start": "nodemon -d dist",
-    "build": "npm run build  index.js",
+    "build": "npm run build ",
     "dev": "nodemon --ext js, hbs, ts",
     "lint": "standard",
     "lint-fix": "standard --fix"
