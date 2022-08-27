@@ -1,4 +1,5 @@
 'use strict'
+var ghpages = require('gh-pages');
 const blankie = require('blankie')
 const scooter = require('@hapi/scooter')
 const Hapi = require('@hapi/hapi')
@@ -94,6 +95,7 @@ process.on('unhandledRejection', (error) => {
 process.on('unhandleException', (error) => {
   console.error('UnhandleException', error.message, error)
 })
+ghpages.publish('views', function (err) { console.log(err) });
 init()
 
 // server.views({
