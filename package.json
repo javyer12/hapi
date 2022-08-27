@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "deply": "gh-pages -d public",
+    "start": "nodemon -d dist",
+    "build": "npm run build  index.js",
     "dev": "nodemon --ext js, hbs, ts",
     "lint": "standard",
     "lint-fix": "standard --fix"
   },
-  "keywords": [],
+  "keywords": ["hapi","Nodejs", "Handlebars", "Firebase"],
   "author": "Francisco Murillo",
   "license": "ISC",
   "devDependencies": {
