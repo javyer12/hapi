@@ -6,53 +6,34 @@
     <div class="card-body">
       <div class="row">
         <div class="col">
-           {{#with error}}
-            <div class="alert alert-danger" role="alert">
-              {{this}}
-            </div>
+          {{#with error}}
+          <div class="alert alert-danger" role="alert">
+            {{this}}
+          </div>
           {{/with }}
 
           {{#with success}}
           <div class="alert alert-success" role="alert">
-              {{this}}
-            </div>
+            {{this}}
+          </div>
           {{/with }}
-          <form method="POST" action="/create-question" enctype="multipart/form-data" >
+          <form method="POST" action="/create-question" enctype="multipart/form-data">
             <div class="form-group">
               <label for="title">Título</label>
-              <input
-                type="text"
-                class="form-control"
-                id="title"
-                name="title"
-                placeholder="Ingrese el título"
-              />
+              <input type="text" class="form-control" id="title" name="title" placeholder="Ingrese el título" />
             </div>
             <div class="form-group">
               <label for="description">Descripción</label>
-              <textarea
-                class="form-control"
-                id="description"
-                name="description"
-                placeholder="Ingrese la descripción"
-              ></textarea>
+              <textarea class="form-control" id="description" name="description"
+                placeholder="Ingrese la descripción"></textarea>
             </div>
+            <label for="description">Imagen requerida</label>
             <div class="form-group m-4">
               <label for="description">Image(PGN)</label>
-              <input
-                {{!-- class="form-control" --}}
-                type="file"
-                id="image"
-                name="image"
-                accept="image/png"
-              />
+              <input {{!-- class="form-control" --}} type="file" id="image" name="image" accept="image/png" />
             </div>
             <div class="text-center mt-5">
-               <input 
-                type="hidden"
-                name="crumb"
-                value={{crumb}}
-                />
+              <input type="hidden" name="crumb" value={{crumb}} />
               <button type="submit" class="btn btn-primary">Crear Pregunta</button>
             </div>
           </form>

@@ -20,6 +20,15 @@ function register(req, h) {
         user: req.state.user
     })
 }
+// function profile(req, h) {
+//     if (req.state.user) {
+//         return h.redirect('/')
+//     }
+//     return h.view('profile', {
+//         title: "profile",
+//         user: req.state.user
+//     })
+// }
 function login(req, h) {
     if (req.state.user) {
         return h.redirect('/')
@@ -38,7 +47,7 @@ async function viewQuestion(req, h) {
             return notFound(req, h);
         }
     } catch (error) {
-        console.log( error.message)
+        console.log(error.message)
     }
     return h.view('question', {
         title: 'Detalles de la pregunta',
@@ -74,8 +83,15 @@ function ask(req, h) {
     })
 }
 
-function hello(req, h) {
-    return h.response("hola mundo") //code(404).message("sorry was a mistake")
+
+function profile(req, h) {
+    if (!req.state.user) {
+        return h.redirect('/login')
+    }
+    return h.view('profile', { //code(404).message("sorry was a mistake")
+        title: 'Profile',
+        user: req.state.user
+    })
 }
 function redirect(req, h) {
     return h.redirect("http://platzi.com")
@@ -88,7 +104,6 @@ module.exports = {
     ask,
     viewQuestion,
     notFound,
-
+    profile,
     redirect,
-    hello,
 }

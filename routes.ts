@@ -4,13 +4,13 @@ const site = require('./controllers/site.ts');
 const user = require('./controllers/user.ts');
 const question = require('./controllers/questions.ts');
 
-module.exports = [{
+module.exports = [ {
     method: 'GET',
     path: '/',
     options: {
         cache: {
             expiresIn: 1000 * 60,
-            privacy : 'private'
+            privacy: 'private'
         }
     },
     handler: site.home
@@ -69,13 +69,18 @@ module.exports = [{
     handler: question.createQuestion
 },
 {
+    method: 'POST',
     path: '/answer-question',
-    method: 'POST', 
     options: {
+        payload: {
+            parse: true,
+            multipart: true
+        },
         validate: {
             payload: joi.object({
                 answer: joi.string().required(),
-                id: joi.string().required()
+                id: joi.string().required(),
+                image: joi.any().optional(),
             }),
             failAction: user.failValidation
         }
@@ -107,11 +112,11 @@ module.exports = [{
     path: '/ask',
     handler: site.ask
 },
-// {
-//     method: 'POST',
-//     path: '/create-user',
-//     handler: user.createUser
-// },
+{
+    method: 'GET',
+    path: '/profile',
+    handler: site.profile
+},
 {
     method: 'GET',
     path: '/redirect',
@@ -123,12 +128,12 @@ module.exports = [{
     handler: {
         directory: {
             path: '.',
-            index: ['index.html']
+            index: [ 'index.html' ]
         }
     }
 },
 {
-    method: ['GET', 'POST'],
+    method: [ 'GET', 'POST' ],
     path: '/{any*}',
     handler: site.notFound
-}]
+} ]

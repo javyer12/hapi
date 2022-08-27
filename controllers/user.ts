@@ -52,12 +52,12 @@ function failValidation(req, h, err) {
         '/validate-user': 'login',
         '/create-question': 'ask'
     }
-    return h.view(templates[req.path], {
+    return h.view(templates[ req.path ], {
         title: 'Error to evaluate ',
         error: 'Check all input has a valid value'
     }).code(404).takeover()
     // return boom.badRequest('Apparently something went wrong, we could not validate your login, try again', req.payload)
-  
+
 }
 module.exports = {
     createUser: createUser,

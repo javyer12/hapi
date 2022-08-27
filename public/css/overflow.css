@@ -652,9 +652,15 @@ pre code {
     width: 100%;
 }
 
+.help {
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
 @media (min-width: 576px) {
     .container {
         max-width: 540px;
+    }
+    .helping {
+    display: block;
     }
 }
 
@@ -662,12 +668,18 @@ pre code {
     .container {
         max-width: 720px;
     }
+    .helping {
+        display: block;
+        }
 }
 
 @media (min-width: 992px) {
     .container {
         max-width: 960px;
     }
+    .helping {
+        display: block;
+        }
 }
 
 @media (min-width: 1200px) {
@@ -901,6 +913,9 @@ pre code {
 }
 
 @media (min-width: 576px) {
+    .container {
+        display: block;
+    }
     .col-sm {
         flex-basis: 0;
         flex-grow: 1;
@@ -1023,6 +1038,9 @@ pre code {
 }
 
 @media (min-width: 768px) {
+    .container {
+        display: block;
+    }
     .col-md {
         flex-basis: 0;
         flex-grow: 1;

@@ -7,25 +7,18 @@ const { v1: uuid } = require('uuid');
 const questiones = require('../models/index.ts').questions;
 
 const write = promisify(writeFile);
-
+// //////////////////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////////////////
 async function createQuestion(req, h) {
     if (!req.state.user) return h.redirect('/login')
 
     console.log(req.payload)
     let result, filename;
-
+    console.log("aqui es resultado", result)
     try {
         const xbuffer = Buffer.from(req.payload.image);
+
         if (Buffer.isBuffer(xbuffer)) {
             filename = `${uuid()}.png`
-            // const path = join(__dirname, '..', 'public/uploads', filename);
-            // await write(path, req.payload.image, (err) => {
-            //     if (err) {
-            //         console.log(err.message)
-            //         console.log("Error uploading file")
-            //     }
-            //     console.log('File is uploaded')
-            // });
             await write(join(__dirname, '..', 'public', 'uploads', filename), req.payload.image);
         }
         result = await questiones.create(req.payload, req.state.user, filename)
@@ -39,21 +32,26 @@ async function createQuestion(req, h) {
     }
     return h.redirect(`/question/${result}`)
 }
-
+// //////////////////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////////////////
 async function answerQuestion(req, h) {
     if (!req.state.user) return h.redirect('/login')
 
-    let result;
-
+    let result, fileanswer;
     try {
-        result = await questiones.answer(req.payload, req.state.user);
-        console.log(`respuesta creada: ${result}`)
+        const xbuffer = Buffer.from(req.payload.image);
+
+        if (Buffer.isBuffer(xbuffer)) {
+            fileanswer = `${uuid()}.png`
+            await write(join(__dirname, '..', 'public', 'Ianswer', fileanswer), req.payload.image);
+        }
+        result = await questiones.answer(req.payload, req.state.user, fileanswer);
+        console.log(`respuesta creada: ${result}, ${req.payload}`)
     } catch (error) {
-        console.log('aqui es ' + error.message)
+        console.log('aqui es ' + error.message,)
     }
     return h.redirect(`/question/${req.payload.id}`);
 }
-
+// //////////////////////////////////////////////////////////////////////////////////// //////////////////////////////////////////////////////////////////////////////////
 async function setAnswerRight(req, h) {
     if (!req.state.user) return h.redirect('/login')
 
